@@ -10,7 +10,7 @@ function [a DD]=interpoly_Newton(x,y)
 % 
 % Author:   Weichao Xu, the Unviersity of Minnesota
 % Email:    xuxxx625 (at) umn (dot) edu
-% Date:     Mar 10, 2012
+% Date:     Mar 10, 2012 
 
 if size(x,2)>1, x=transpose(x); end;
 if size(y,2)>1, y=transpose(y);end;
