@@ -10,7 +10,7 @@ function [a DD]=interpoly_Newton(x,y)
 % 
 % Author:   Weichao Xu, the Unviersity of Minnesota
 % Email:    xuxxx625 (at) umn (dot) edu
-% Date:     Mar 10, 2012 
+% Date:     Mar 10, 2012
 
 if size(x,2)>1, x=transpose(x); end;
 if size(y,2)>1, y=transpose(y);end;
@@ -31,13 +31,11 @@ for col=2:length(x)
 end
 
 %% Numerical Implementation using convolution for high efficiency
-a= zeros(1,length(x)); a(end)=y(1);
+a= zeros(1,length(x)); a(end)=y(1);l=1;
 for k = 2:length(x);
-    l = DD(k,k);
-    for term=1:k-1
-        l=conv(l,[1, -x(term)]);
-    end
-    a(end-length(l)+1 : end)=a(end-length(l)+1 : end) +l;
+    l=conv(l,[1, -x(k-1)]); % using previous result
+    a(end-length(l)+1 : end)=...
+        a(end-length(l)+1 : end) +l*DD(k,k);
 end
 
 %% Symbolic Implementation
