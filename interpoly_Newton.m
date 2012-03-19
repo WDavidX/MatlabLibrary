@@ -1,4 +1,4 @@
-function [a DD]=interpoly_Newton(x,y)
+function [a DD l]=interpoly_Newton(x,y)
 % function [a DD]=interpoly_newton(x,y)
 % This function interpolates the set of n points (xi, yi)  
 % using Newton's iterative method
@@ -33,9 +33,9 @@ end
 %% Numerical Implementation using convolution for high efficiency
 a= zeros(1,length(x)); a(end)=y(1);l=1;
 for k = 2:length(x);
-    l=conv(l,[1, -x(k-1)]); % using previous result
-    a(end-length(l)+1 : end)=...
-        a(end-length(l)+1 : end) +l*DD(k,k);
+    l=conv(l,[1, -x(k-1)]); % using previous calculated result
+    a( end-length(l)+1 : end)=...
+        a( end-length(l)+1 : end) +l*DD(k,k);
 end
 
 %% Symbolic Implementation
